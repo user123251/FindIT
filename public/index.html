@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FindIt – University Lost &amp; Found</title>
+<meta name="description" content="Report lost belongings, post found items and get them back to their owners on campus.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔎</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700;800&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<header class="top">
+  <a class="logo" href="#top"><span class="hole"></span>FindIt</a>
+  <nav>
+    <a href="#browse">Browse items</a>
+    <a href="#how">How it works</a>
+    <a href="/about.html">Safety &amp; FAQ</a>
+    <button class="btn dark" data-open="report">Report an item</button>
+  </nav>
+</header>
+
+<main id="top">
+  <section class="hero">
+    <div>
+      <h1>Lost it on campus? Someone probably found it.</h1>
+      <p class="lead">FindIt connects students who lost something with the students who picked it up. Search by item, place or date, then message the finder directly.</p>
+      <div class="cta">
+        <button class="btn coral" data-open="report" data-type="lost">I lost something</button>
+        <button class="btn teal" data-open="report" data-type="found">I found something</button>
+      </div>
+    </div>
+    <div class="tagstack" aria-hidden="true">
+      <div class="tag lost t1"><b>Black laptop sleeve</b><span>Lost · Library, 2nd floor</span></div>
+      <div class="tag found t2"><b>Blue water bottle</b><span>Found · Sports Complex</span></div>
+      <div class="tag found t3"><b>Student ID card</b><span>Found · Canteen</span></div>
+    </div>
+  </section>
+
+  <section class="stats" id="stats"></section>
+
+  <section id="browse" class="wrap">
+    <h2>Browse items</h2>
+    <form class="filters" id="filters" role="search">
+      <input type="search" id="q" placeholder="Search keys, wallet, charger, ID…" aria-label="Search items">
+      <select id="ftype" aria-label="Type"><option value="">Lost &amp; found</option><option value="lost">Lost only</option><option value="found">Found only</option></select>
+      <select id="fcat" aria-label="Category"><option value="">All categories</option></select>
+      <select id="floc" aria-label="Location"><option value="">All locations</option></select>
+      <select id="fsort" aria-label="Sort"><option value="new">Newest first</option><option value="old">Oldest first</option></select>
+    </form>
+    <p id="count" class="muted" aria-live="polite"></p>
+    <div id="grid" class="grid"></div>
+  </section>
+
+  <section id="how" class="wrap how">
+    <h2>How it works</h2>
+    <ol>
+      <li><h3>Post it</h3><p>Describe what you lost or found, where, and when. Add a photo if you have one.</p></li>
+      <li><h3>Match it</h3><p>Search the board. Found items and lost reports sit side by side, so matches are easy to spot.</p></li>
+      <li><h3>Hand it back</h3><p>Message the poster, confirm a detail only the owner knows, and meet somewhere public on campus.</p></li>
+    </ol>
+    <p class="safety"><b>Stay safe:</b> meet in busy places like the library desk or the security office. Never share passwords, card numbers or your home address. Valuables such as IDs and phones can also be handed to Campus Security.</p>
+  </section>
+</main>
+
+<footer><span>© <span id="yr"></span> FindIt · Built by students, for students.</span></footer>
+
+<dialog id="reportDlg">
+  <form id="reportForm" method="dialog">
+    <h2>Report an item</h2>
+    <fieldset class="seg"><legend class="sr">Type</legend>
+      <label><input type="radio" name="type" value="lost" checked><span>I lost it</span></label>
+      <label><input type="radio" name="type" value="found"><span>I found it</span></label>
+    </fieldset>
+    <label>Item name<input name="title" required maxlength="60" placeholder="e.g. Grey Nike backpack"></label>
+    <div class="row">
+      <label>Category<select name="category" required></select></label>
+      <label>Date<input type="date" name="date" required></label>
+    </div>
+    <label>Location<select name="location" required></select></label>
+    <label>Description<textarea name="desc" rows="3" required maxlength="300" placeholder="Colour, brand, marks, what's inside. For found items, leave out one detail so the owner can prove it's theirs."></textarea></label>
+    <label>Photo (optional)<input type="file" name="photo" accept="image/*"></label>
+    <p class="err" id="rerr" role="alert"></p>
+    <div class="actions"><button type="button" class="btn ghost" data-close>Cancel</button><button class="btn dark" id="postBtn">Post item</button></div>
+  </form>
+</dialog>
+
+<dialog id="itemDlg"><div id="itemBody"></div></dialog>
+<div id="toast" role="status" aria-live="polite"></div>
+<script src="/js/common.js"></script>
+<script src="/js/app.js"></script>
+</body>
+</html>
